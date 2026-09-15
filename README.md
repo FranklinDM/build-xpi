@@ -1,6 +1,6 @@
 # build-xpi
 
-GitHub Action to build `.xpi` packages for UXP-based browsers (Pale Moon, Ambassador, Epyrus, and applications using the Firefox or Thunderbird GUID). It pulls metadata out of `install.rdf`, tags the filename with the target app codes, handles dev vs release versioning, and zips everything up cleanly.
+GitHub Action to build `.xpi` packages for UXP-based applications (Pale Moon, Ambassador, Epyrus, and applications using the Firefox or Thunderbird GUID). It pulls metadata out of `install.rdf`, tags the filename with the target app codes, handles dev vs release versioning, and zips everything up cleanly.
 
 ## What it does
 
