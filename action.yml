@@ -1,0 +1,39 @@
+name: "Build XPI Package"
+description: "Parses install.rdf, updates version metadata, and packages files into an XPI"
+inputs:
+  package-name:
+    description: "Base package name for the XPI"
+    required: true
+  source-dir:
+    description: "Source directory containing install.rdf and extension contents (use '.' for repo root)"
+    required: false
+    default: "src"
+outputs:
+  xpi-filename:
+    description: "Generated XPI filename"
+    value: ${{ steps.build_step.outputs.xpi_filename }}
+
+runs:
+  using: "composite"
+  steps:
+    - name: Set up Python
+      uses: actions/setup-python@v6
+      with:
+        python-version: '3.x'
+
+    - name: Parse metadata, modify manifest, and build XPI
+      id: build_step
+      shell: bash
+      env:
+        PACKAGE_NAME: ${{ inputs.package-name }}
+        SOURCE_DIR: ${{ inputs.source-dir }}
+        REF_TYPE: ${{ github.ref_type }}
+        SHA: ${{ github.sha }}
+      run: |
+        python "${{ github.action_path }}/build.py"
+
+    - name: Upload XPI artifact
+      uses: actions/upload-artifact@v6
+      with:
+        name: ${{ steps.build_step.outputs.xpi_filename }}
+        path: ${{ steps.build_step.outputs.xpi_filename }}
