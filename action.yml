@@ -12,6 +12,9 @@ outputs:
   xpi-filename:
     description: "Generated XPI filename"
     value: ${{ steps.build_step.outputs.xpi_filename }}
+  is-prerelease:
+    description: "Whether the version string matches a Mozilla-style prerelease pattern (a#/b#/rc#)"
+    value: ${{ steps.build_step.outputs.is_prerelease }}
 
 runs:
   using: "composite"

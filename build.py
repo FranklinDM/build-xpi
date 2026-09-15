@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
 import os
+import re
 import xml.etree.ElementTree as ET
 import zipfile
 
@@ -26,6 +27,8 @@ version_elem = root.find(".//em:version", ns)
 if version_elem is None or not version_elem.text:
     raise ValueError("Could not find <em:version> in install.rdf")
 base_version = version_elem.text.strip()
+is_prerelease = bool(re.search(r"[0-9](a|b|rc)[0-9]+$", base_version))
+print(f"Prerelease detected: {is_prerelease}")
 
 # 2. Append short commit hash to version if not a tagged release
 ref_type = os.environ.get("REF_TYPE", "")
@@ -81,3 +84,4 @@ with zipfile.ZipFile(xpi_filename, "w", zipfile.ZIP_DEFLATED) as xpi:
 # Pass the values cleanly to downstream steps
 with open(os.environ["GITHUB_OUTPUT"], "a") as out_file:
     out_file.write(f"xpi_filename={xpi_filename}\n")
+    out_file.write(f"is_prerelease={'true' if is_prerelease else 'false'}\n")
