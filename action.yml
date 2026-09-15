@@ -1,4 +1,4 @@
-name: "Build XPI Package"
+name: "Build XPI for UXP"
 description: "Parses install.rdf, updates version metadata, and packages files into an XPI"
 author: "FranklinDM"
 branding:
