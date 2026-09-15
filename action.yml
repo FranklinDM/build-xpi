@@ -37,7 +37,7 @@ runs:
         REF_TYPE: ${{ github.ref_type }}
         SHA: ${{ github.sha }}
       run: |
-        python "${{ github.action_path }}/build.py"
+        python "${{ github.action_path }}/src/build.py"
 
     - name: Upload XPI artifact
       uses: actions/upload-artifact@v6
