@@ -75,4 +75,5 @@ jobs:
           files: ${{ steps.builder.outputs.xpi-filename }}
           name: ${{ github.ref_name }}
           generate_release_notes: true
+          prerelease: ${{ steps.builder.outputs.is-prerelease }}
 ```
