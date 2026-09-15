@@ -1,5 +1,9 @@
 name: "Build XPI Package"
 description: "Parses install.rdf, updates version metadata, and packages files into an XPI"
+author: "FranklinDM"
+branding:
+  color: "blue"
+  icon: "package"
 inputs:
   package-name:
     description: "Base package name for the XPI"
